@@ -9,7 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "http://localhost:8001/openapi.json"
+    "url": "https://ddggpt.timesurgelabs.com/openapi.json"
   },
   "logo_url": "https://upload.wikimedia.org/wikipedia/en/archive/9/90/20211207123704%21The_DuckDuckGo_Duck.png",
   "contact_email": "chandler@timesurgelabs.com",

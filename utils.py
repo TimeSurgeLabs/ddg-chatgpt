@@ -6,9 +6,9 @@ def get_text(html_content):
 
     # find all the p tags and div tags in the HTML content
     p_tags = soup.find_all('p')
-    div_tags = soup.find_all('div')
+    # div_tags = soup.find_all('div')
 
     # extract the raw text from all the p tags and div tags and concatenate them
-    raw_text = '\n'.join([tag.get_text() for tag in p_tags + div_tags])
+    raw_text = '\n'.join([tag.get_text() for tag in p_tags])
 
     return raw_text

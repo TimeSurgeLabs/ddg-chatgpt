@@ -1,14 +1,21 @@
 from bs4 import BeautifulSoup
 
+
 def get_text(html_content):
-    # parse the HTML content using BeautifulSoup
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    # find all the p tags and div tags in the HTML content
-    p_tags = soup.find_all('p')
-    # div_tags = soup.find_all('div')
+    # Remove script, style, head, header, and navbar elements
+    for element in soup(['script', 'style', 'head', 'header', 'nav', 'footer']):
+        element.decompose()
 
-    # extract the raw text from all the p tags and div tags and concatenate them
-    raw_text = '\n'.join([tag.get_text() for tag in p_tags])
+    text = soup.get_text()
 
-    return raw_text
+    # Remove leading and trailing spaces on each line
+    lines = (line.strip() for line in text.splitlines())
+    # Break multi-headlines into a line each
+    chunks = (phrase.strip()
+              for line in lines for phrase in line.split("  "))
+    # Drop blank lines
+    text = '\n'.join(chunk for chunk in chunks if chunk)
+
+    return text

@@ -1,5 +1,10 @@
 FROM python:3.10-slim-buster
 
+# install headless firefox
+RUN apt-get update && apt-get install -y \
+  firefox-esr \
+  && rm -rf /var/lib/apt/lists/*
+
 # install pipenv and update pip
 RUN pip install --upgrade pipenv pip
 

@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from duckduckgo_search import ddg, ddg_news
-import httpx
 
 from models import SearchRequest, SearchResponse, ContentRequest, ContentResponse
 from utils import get_text
+from browser import get_site
 
 # create a new FastAPI app with cors enabled
 app = FastAPI(title="Web Search")
@@ -33,8 +33,8 @@ def news(search_req: SearchRequest):
 
 @app.post("/content", description="Get the content of a URL", response_model=ContentResponse)
 def content(content_req: ContentRequest):
-    resp = httpx.get(content_req.url)
-    text = get_text(resp.text)
+    resp = get_site(content_req.url)
+    text = get_text(resp)
     return {"content": text}
 
 @app.get('/.well-known/ai-plugin.json', include_in_schema=False)

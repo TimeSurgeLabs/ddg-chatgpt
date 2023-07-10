@@ -15,5 +15,9 @@ def get_site(url: str):
 
 
 def get_raw(url: str):
-    resp = httpx.get(url)
+    resp = httpx.get(url, follow_redirects=True)
     return resp.text
+
+
+if __name__ == "__main__":
+    print(get_raw("https://github.com/ava-labs/subnet-evm/raw/master/contracts/contracts/AllowList.sol"))

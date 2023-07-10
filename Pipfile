@@ -9,6 +9,7 @@ uvicorn = "*"
 duckduckgo-search = "*"
 bs4 = "*"
 selenium = "*"
+httpx = "*"
 
 [dev-packages]
 autopep8 = "*"

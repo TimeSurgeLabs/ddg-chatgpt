@@ -5,7 +5,7 @@ from duckduckgo_search import ddg, ddg_news
 
 from models import SearchRequest, SearchResponse, ContentRequest, ContentResponse
 from utils import get_text
-from browser import get_site
+from browser import get_site, get_raw
 
 # create a new FastAPI app with cors enabled
 app = FastAPI(title="Web Search")
@@ -40,6 +40,12 @@ def content(content_req: ContentRequest):
     resp = get_site(content_req.url)
     text = get_text(resp)
     return {"content": text}
+
+
+@app.post("/content/raw", description="Get the raw content of a URL. Use for getting raw files from GitHub or getting text files.", response_model=ContentResponse)
+def content_raw(content_req: ContentRequest):
+    resp = get_raw(content_req.url)
+    return {"content": resp}
 
 
 @app.get('/.well-known/ai-plugin.json', include_in_schema=False)

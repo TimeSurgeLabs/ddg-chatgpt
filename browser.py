@@ -11,7 +11,9 @@ def get_site(url: str):
     driver = webdriver.Firefox(options=options)
     driver.get(url)
     time.sleep(2)
-    return driver.page_source
+    content = driver.page_source
+    driver.close()
+    return content
 
 
 def get_raw(url: str):
